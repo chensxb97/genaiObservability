@@ -1,7 +1,20 @@
 # Generative AI for Observability
 Exploring different usecases of AI in Observability
 
+## Usage
+1. Install depencies
+```
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
+2. Run examples in `main.py`
+```
+python3 main.py
+```
+
 ## Examples
+Experimental prompt/output results can be found in the `/examples/` folder.
 - `alert_summariser.txt` - Summarise alert details.
 - `clickhouse_query_generator.txt` - Generates a suitable Clickhouse Query from Natural Language.
 - `grafana_dashboard_generator.txt` - Generates a scaffold of a dashboard JSON object, which can be imported on Grafana.

@@ -2,7 +2,7 @@
 Exploring different usecases of AI in Observability
 
 ## Usage
-1. Install depencies
+1. Install dependencies
 ```
 python3 -m venv venv
 source venv/bin/activate

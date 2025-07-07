@@ -187,7 +187,6 @@ def review_infra_code():
 
 print(f'############ Start ############\n')
 
-
 funcs = [
     alert_summariser_test,
     grafana_dashboard_generator,

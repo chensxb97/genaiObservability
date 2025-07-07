@@ -1,0 +1,69 @@
+Prompt:
+Review the following infrastructure code for K8 Deployment:
+    ```yaml
+    apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containerz:
+        - name: test-app
+          image: nginx:latest
+          ports:
+            - containerPort: eighty
+          volumeMounts:
+            - name: config
+              mountPath: /etc/config
+      volumes:
+        - name: config
+          configMap:
+            name: test-app-config
+
+    ```
+
+Output:
+### 1. Summary
+The provided Kubernetes Deployment YAML has a few syntax errors and issues that need to be addressed:
+
+1. **Typo in `containers`**: The key `containerz` is misspelled; it should be `containers`.
+2. **Invalid port number**: The port number `eighty` is not a valid integer; it should be `80`.
+3. **Indentation issues**: The indentation of some elements is inconsistent, which can cause parsing errors.
+
+### 2. Recommended change
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+        - name: test-app
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config
+              mountPath: /etc/config
+      volumes:
+        - name: config
+          configMap:
+            name: test-app-config
+```

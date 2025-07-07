@@ -1,0 +1,44 @@
+Prompt:
+Please help me extract key metadata from the following raw logs: 
+2023-10-01 12:00:00 INFO [web-server] Request received
+2023-10-01 12:00:01 ERROR [web-server] Failed to connect to database
+2023-10-01 12:00:02 INFO [web-server] Response sent
+2023-10-01 12:00:03 WARN [database] High memory usage detected
+2023-10-01 12:00:04 ERROR [database] Timeout while processing request
+
+
+Output:
+```json
+[
+    {
+        "timestamp": "2023-10-01 12:00:00",
+        "log_level": "INFO",
+        "source": "web-server",
+        "message": "Request received"
+    },
+    {
+        "timestamp": "2023-10-01 12:00:01",
+        "log_level": "ERROR",
+        "source": "web-server",
+        "message": "Failed to connect to database"
+    },
+    {
+        "timestamp": "2023-10-01 12:00:02",
+        "log_level": "INFO",
+        "source": "web-server",
+        "message": "Response sent"
+    },
+    {
+        "timestamp": "2023-10-01 12:00:03",
+        "log_level": "WARN",
+        "source": "database",
+        "message": "High memory usage detected"
+    },
+    {
+        "timestamp": "2023-10-01 12:00:04",
+        "log_level": "ERROR",
+        "source": "database",
+        "message": "Timeout while processing request"
+    }
+]
+```

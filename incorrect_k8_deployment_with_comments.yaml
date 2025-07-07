@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containerz: # ❌ ERROR 1: Typo – should be `containers`
+        - name: test-app
+          image: nginx:latest
+          ports:
+            - containerPort: eighty # ❌ ERROR 2: Invalid value – should be an integer like 80
+          volumeMounts:
+            - name: config
+              mountPath: /etc/config
+      volumes:
+        - name: config
+          configMap:
+            name: test-app-config # ❌ ERROR 3: Likely missing ConfigMap definition

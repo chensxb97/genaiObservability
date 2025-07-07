@@ -1,0 +1,12 @@
+Prompt:
+What is the average response time for the last 24 hours?
+
+Output:
+```cql
+SELECT
+    avg(response_time) AS average_response_time
+FROM
+    response_times
+WHERE
+    event_time >= now() - INTERVAL 24 HOUR
+```

@@ -1,0 +1,88 @@
+
+Prompt:
+Please provide me a contact for your team.
+
+Output:
+Sure! Here are the key contacts for the Team Observability:
+
+| Role                | Person      | Slack       |
+| ------------------- | ----------- | ----------- |
+| Tech Lead           | Alex Tan    | `@alex`     |
+| Engineering Manager | Priya Patel | `@priya`    |
+| Staff Engineer      | Jordan Ng   | `@jordanng` |
+Prompt:
+Please provide a me a brief overview of your team and its responsibilities.
+
+Output:
+Certainly! Team Observability is a cross-functional group focused on solving ambiguous problems with creative, data-informed solutions. Our work spans multiple domains and often bridges gaps between engineering, product, and operations. Here's a brief overview of our key responsibilities:
+
+1. **Metrics Infrastructure**: We build and operate Prometheus, Thanos, and Grafana to ensure robust metrics collection and visualization.
+
+2. **Logging Platform**: We manage the ELK stack and integrate with FluentBit to provide comprehensive logging capabilities.
+
+3. **Distributed Tracing**: We support OpenTelemetry and Jaeger to help teams trace and debug distributed systems.
+
+4. **Alerting & Automation**: We standardize alert rules, implement auto-remediation, and define Service Level Objectives (SLOs) to ensure system reliability.
+
+5. **Developer Tooling**: We build SDKs and dashboards to empower service owners with the tools they need.
+
+Our goal is to provide the necessary infrastructure and tools to make observability seamless and effective across the organization. If you have any specific questions or need more details, feel free to ask!
+Prompt:
+Please provide a step-by-step guide on how to onboard to your observability system.
+
+Output:
+Certainly! Here's a step-by-step guide to help you onboard to our observability system:
+
+### Step 1: Setup
+1. **Join Slack Channel**
+   - Join the #observability Slack channel to stay updated and ask questions.
+
+2. **Access Required Tools**
+   - Request access to the following tools:
+     - GitHub repo: `infra/observability-platform`
+     - Grafana
+     - PagerDuty
+     - Internal wiki
+
+3. **Clone and Set Up Repository**
+   - Clone the observability platform repository:
+     ```sh
+     git clone https://github.com/your-org/infra/observability-platform.git
+     ```
+   - Run the development setup script:
+     ```sh
+     cd infra/observability-platform
+     ./scripts/dev-setup.sh
+     ```
+
+4. **Meet Your Onboarding Buddy**
+   - Your onboarding buddy will help you navigate the initial setup and answer any questions you might have.
+
+### Step 2: Learn
+1. **Read Architecture Overview**
+   - Familiarize yourself with the architecture of our observability system by reading the Architecture Overview document available in the internal wiki.
+
+2. **Review Runbooks**
+   - Go through the Runbooks for key services to understand how to handle common issues and scenarios.
+
+3. **Attend Observability 101 Workshop**
+   - Sign up for the weekly Observability 101 workshop to get hands-on experience and learn best practices.
+
+### Step 3: Contribute
+1. **Pick a Starter Ticket**
+   - Look for "Good First Issues" in the GitHub repository and pick one to start contributing.
+
+2. **Shadow On-Call Rotation**
+   - Shadow an on-call rotation to understand the alerting and incident response process.
+
+3. **Deploy Your First Grafana Dashboard**
+   - Create and deploy your first Grafana dashboard to get hands-on experience with our monitoring tools.
+
+### Additional Resources
+- **Contact Information**
+  - If you have any questions or need further assistance, you can reach out to:
+    - **Tech Lead**: Alex Tan (`@alex`)
+    - **Engineering Manager**: Priya Patel (`@priya`)
+    - **Staff Engineer**: Jordan Ng (`@jordanng`)
+
+By following these steps, you should be well on your way to becoming productive within our observability system. If you encounter any issues or have questions, don't hesitate to reach out to your onboarding buddy or any of the team members listed above. Welcome aboard!

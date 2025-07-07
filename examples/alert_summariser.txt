@@ -1,0 +1,14 @@
+Prompt:
+ Alert Details: {
+  "alert_name": "High CPU Usage",
+  "severity": "critical",
+  "description": "CPU usage has exceeded 90% for the last 5 minutes on server XYZ. This could indicate a potential performance issue or a runaway process.",
+  "timestamp": "2023-10-01T12:00:00Z",
+  "application": "web-server",
+  "environment": "production"
+}
+
+Output:
+**Summary:**
+
+There's a critical issue with our production web server, where the CPU usage has been over 90% for the past 5 minutes. This could be causing performance problems or might be due to a runaway process. Immediate attention is required to investigate and resolve the issue to prevent any potential downtime or service degradation.

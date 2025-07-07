@@ -1,0 +1,214 @@
+Prompt:
+Prometheus Query: sum(rate(http_requests_total{job="web-server", status="500"}[5m])) by (instance)
+
+Output:
+Based on the provided Prometheus query, which tracks the rate of HTTP 500 errors for a web server, I've created a Grafana dashboard JSON that includes related metrics for monitoring the web server's health and performance. The dashboard is organized into sections for Error Tracking, Request Rates, Response Times, and System Metrics.
+
+```json
+{
+  "dashboard": {
+    "title": "Web Server Monitoring",
+    "panels": [
+      {
+        "title": "500 Errors Rate",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{job=\"web-server\", status=\"500\"}[5m])) by (instance)",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "title": "500 Errors by Instance",
+        "type": "table",
+        "gridPos": {
+          "x": 12,
+          "y": 0,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{job=\"web-server\", status=\"500\"}[5m])) by (instance)",
+            "refId": "A"
+          }
+        ],
+        "columns": [
+          {
+            "text": "Instance",
+            "value": "instance"
+          },
+          {
+            "text": "500 Errors Rate",
+            "value": "value"
+          }
+        ]
+      },
+      {
+        "title": "Error Rate (All Statuses)",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 4,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{job=\"web-server\"}[5m])) by (status)",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "title": "Request Rate",
+        "type": "graph",
+        "gridPos": {
+          "x": 12,
+          "y": 4,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{job=\"web-server\"}[5m]))",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "title": "Response Time",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 8,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(http_response_time_seconds_bucket{job=\"web-server\"}[5m])) by (le))",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "title": "Response Time Distribution",
+        "type": "histogram",
+        "gridPos": {
+          "x": 12,
+          "y": 8,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(http_response_time_seconds_bucket{job=\"web-server\"}[5m])) by (le)",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "title": "CPU Usage",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 12,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(node_cpu_seconds_total{job=\"web-server\"}[5m])) by (mode)",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "title": "Memory Usage",
+        "type": "graph",
+        "gridPos": {
+          "x": 12,
+          "y": 12,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "(node_memory_MemTotal_bytes{job=\"web-server\"} - node_memory_MemFree_bytes{job=\"web-server\"} - node_memory_Buffers_bytes{job=\"web-server\"} - node_memory_Cached_bytes{job=\"web-server\"}) / node_memory_MemTotal_bytes{job=\"web-server\"}",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "title": "Disk I/O",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 16,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(node_disk_io_now{job=\"web-server\"}[5m])) by (device)",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "title": "Network I/O",
+        "type": "graph",
+        "gridPos": {
+          "x": 12,
+          "y": 16,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(node_network_receive_bytes_total{job=\"web-server\"}[5m])) by (device)",
+            "refId": "A"
+          },
+          {
+            "expr": "sum(rate(node_network_transmit_bytes_total{job=\"web-server\"}[5m])) by (device)",
+            "refId": "B"
+          }
+        ]
+      }
+    ],
+    "refresh": "1m",
+    "timezone": "browser"
+  },
+  "overwrite": true
+}
+```
+
+This dashboard includes:
+
+1. Error Tracking:
+   - 500 Errors Rate (graph)
+   - 500 Errors by Instance (table)
+   - Error Rate (All Statuses) (graph)
+
+2. Request Rates:
+   - Request Rate (graph)
+
+3. Response Times:
+   - Response Time (graph)
+   - Response Time Distribution (histogram)
+
+4. System Metrics:
+   - CPU Usage (graph)
+   - Memory Usage (graph)
+   - Disk I/O (graph)
+   - Network I/O (graph)
+
+The dashboard is set to refresh every minute and uses the browser's timezone. You can customize this JSON further by adjusting the panel sizes, colors, and other visual properties to fit your preferences.

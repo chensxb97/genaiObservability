@@ -1,0 +1,48 @@
+Prompt:
+```json{
+    "alert": {
+        "alert_name": "High CPU Usage",
+        "severity": "critical",
+        "description": "CPU usage exceeded 90% for 5 minutes on server XYZ.",
+        "timestamp": "2023-10-01T12:00:00Z",
+        "application": "web-server",
+        "environment": "production"
+    },
+    "logs": [
+        "2023-10-01T11:59:23Z ERROR nginx[1234]: worker process exited on signal 9",
+        "2023-10-01T11:59:25Z WARN app[5678]: GC pause exceeded threshold",
+        "2023-10-01T11:58:12Z INFO deploy: web-server v2.3.1 deployed to XYZ"
+    ],
+    "deployments": [
+        {
+            "service": "web-server",
+            "version": "v2.3.1",
+            "timestamp": "2023-10-01T11:58:00Z"
+        }
+    ],
+    "metrics": {
+        "cpu_load_avg": "92%",
+        "memory_usage": "68%",
+        "disk_io": "normal"
+    }
+}```
+
+Output:
+### Root Cause Analysis (RCA) Summary
+
+**What is likely causing the issue:**
+The high CPU usage (92%) on server XYZ is likely caused by the recent deployment of web-server version v2.3.1. The logs indicate that an nginx worker process exited on signal 9 (SIGKILL), which could be a result of resource constraints or a bug in the new version. Additionally, the garbage collection (GC) pause exceeded the threshold, suggesting that the application is under significant stress, possibly due to inefficient code or increased load.
+
+**What systems are affected:**
+- The web-server application running on server XYZ in the production environment.
+- The nginx worker processes, which are critical for handling web traffic.
+
+**Suggested next steps to mitigate or resolve:**
+1. **Rollback the Deployment:** Consider rolling back to the previous stable version of the web-server (v2.3.0 or earlier) to see if the issue resolves.
+2. **Investigate Nginx Logs:** Check nginx logs for more details on why the worker process was terminated.
+3. **Analyze Application Logs:** Look into the application logs for any additional errors or warnings that might provide more context.
+4. **Monitor Resource Usage:** Continuously monitor CPU, memory, and disk I/O to identify any patterns or anomalies.
+5. **Optimize Application Code:** If the issue persists, review the application code for potential optimizations, especially around garbage collection and resource management.
+6. **Scale Resources:** If necessary, consider scaling up the server resources temporarily to handle the increased load while investigating the root cause.
+
+By following these steps, you should be able to mitigate the immediate issue and gather more information to prevent future occurrences.

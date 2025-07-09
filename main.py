@@ -185,6 +185,30 @@ def review_infra_code():
         f.write("\nOutput:\n")
         f.write(result)
 
+def rca_assistant():
+    """
+    Test function for Root Cause Analysis assistant.
+    """
+    system_prompt = '''
+    You are an observability and incident response assistant.
+    Given the observabilty data, analyze the root cause of the incident. 
+    Provide a short RCA summary including:
+    - What is likely causing the issue
+    - What systems are affected
+    - Suggested next steps to mitigate or resolve
+    '''
+
+    with open(cwd / 'observability_data.json', 'r') as f:
+        obs_data = f.read()
+
+    prompt = f'''```json{obs_data}```'''
+    print('Prompt: ', prompt)
+    result = call_mistral(prompt, system_prompt)
+    with open(cwd / 'examples/rca_assistant.txt', 'w') as f:
+        f.write(f"Prompt:\n{prompt}\n")
+        f.write("\nOutput:\n")
+        f.write(result)
+
 print(f'############ Start ############\n')
 
 funcs = [
@@ -194,7 +218,8 @@ funcs = [
     clickhouse_query_generator,
     prometheus_config_generator,
     review_infra_code,
-    onboarding_guide
+    onboarding_guide,
+    rca_assistant
 ]
 
 for func in funcs:
